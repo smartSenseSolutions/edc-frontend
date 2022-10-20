@@ -1,0 +1,123 @@
+.heroes {
+  list-style-type: none;
+  margin: 0 0 2em 0;
+  padding: 0;
+
+  li {
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+      left: 0.1em;
+    }
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.3em 0;
+    height: 1.8em;
+    border-radius: 4px;
+    width: 100%;
+
+    &:hover {
+      color: #2c3a41;
+      background-color: #e6e6e6;
+    }
+
+    &:active {
+      background-color: #525252;
+      color: #fafafa;
+    }
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: small;
+    position: relative;
+    text-align: right;
+    color: white;
+    background-color: #405061;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    left: -1px;
+    top: -4px;
+    height: 1.8em;
+    min-width: 16px;
+    margin-right: 0.8em;
+    border-radius: 4px 0 0 4px;
+  }
+}
+
+.add-button {
+  margin-left: auto;
+  display: block;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.add-button:hover {
+  color: white;
+  background-color: #42545c;
+}
+
+button.delete {
+  position: absolute;
+  background-color: white;
+  color: #525252;
+  left: 210px;
+  top: 5px;
+  font-size: 1.1rem;
+  margin: 0;
+  padding: 1px 10px 3px 10px;
+
+  &:hover {
+    background-color: #525252;
+    color: white;
+  }
+}
+
+.heading {
+  margin: 16px 0;
+}
+
+.sub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.optionButton {
+  a {
+    text-decoration: none;
+    display: inline-block;
+    background-color: #e8e8e8;
+    color: #3d3d3d;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 10px 20px 0 0;
+
+    &:hover {
+      color: white;
+      background-color: #42545c;
+    }
+  }
+
+  a.active {
+    color: white;
+    background-color: black;
+  }
+}
+
+form {
+  overflow-x: hidden;
+  margin-top: 20px;
+
+  button {
+    margin-left: 0;
+  }
+}

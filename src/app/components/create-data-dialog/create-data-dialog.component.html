@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Create Data</h1>
+<div mat-dialog-content>
+  <form [formGroup]="edcForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="data.id >= 3">
+      <label>Parts:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Parts</mat-label>
+        <mat-select formControlName="parts" multiple>
+          <mat-option *ngFor="let part of partsList" [value]="part">{{
+            part
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <label>Description</label>
+      <textarea
+        formControlName="description"
+        [maxlength]="1000"
+        rows="8"
+        cols="25%"
+      ></textarea>
+      <span *ngIf="description && description.value.length > 1000"
+        >You can enter only 1000 characters</span
+      >
+    </div>
+    <button type="submit" class="add-button">Submit</button>
+  </form>
+</div>

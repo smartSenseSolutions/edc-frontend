@@ -1,0 +1,28 @@
+h1 {
+  font-weight: 500;
+  padding-bottom: 1.5rem;
+}
+
+form {
+  label {
+    display: block;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+
+  > div {
+    width: 70%;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+
+    textarea,
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  button {
+    padding-top: 1rem;
+  }
+}

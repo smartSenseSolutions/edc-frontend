@@ -1,0 +1,51 @@
+<h2 class="heading">Catalogue/ Contract Offers</h2>
+
+<ul class="heroes">
+  <li *ngFor="let offer of offersList; let i = index">
+    <a (click)="jsonView(offer)">
+      <span class="badge">{{ i + 1 }}</span>
+      {{ offer["asset"]["properties"]["asset:prop:id"] }}
+    </a>
+
+    <a *ngIf="offer.contractAgreementId">
+      <b>Contract AgreementId : </b> {{ offer.contractAgreementId || "-" }}
+    </a>
+    <a *ngIf="offer.assetData1">
+      <b>Data Transfer Request Id : </b> {{ offer.assetData1 || "-" }}
+    </a>
+
+    <div>
+      <button
+        *ngIf="!offer.contractAgreementId"
+        type="button"
+        class="delete"
+        (click)="onStartNegotiation(offer)"
+      >
+        Start Negotiation
+      </button>
+    </div>
+    <div>
+      <button
+        style="left: 410px"
+        type="button"
+        class="delete"
+        *ngIf="offer.contractAgreementId && !offer.assetData1"
+        (click)="onStartDataTransfer(offer)"
+      >
+        Request Data Transfer
+      </button>
+    </div>
+    <div>
+      <button
+        style="left: 810px"
+        type="button"
+        class="delete"
+        *ngIf="offer.assetData"
+        (click)="jsonView(offer.assetData)"
+      >
+        View Asset
+      </button>
+    </div>
+  </li>
+</ul>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

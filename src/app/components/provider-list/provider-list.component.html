@@ -1,0 +1,51 @@
+<div class="optionButton">
+  <a [ngClass]="{ active: edcRole === 1 }" (click)="onRoleClick(1)">
+    Data Provider
+  </a>
+  <a [ngClass]="{ active: edcRole === 2 }" (click)="onRoleClick(2)">
+    Data Consumer
+  </a>
+</div>
+<div *ngIf="edcRole == 2">
+  <form (ngSubmit)="getOffer()">
+    <h3>Select Consumer From DropDown</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Data Consumer</mat-label>
+      <mat-select [(value)]="providerName" required>
+        <mat-option *ngFor="let item of list" [value]="item.value">
+          {{ item.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button type="submit" class="add-button">Fetch Catalogue</button>
+  </form>
+</div>
+<div *ngIf="showCatalog">
+  <app-offer-list [providerId]="providerId"></app-offer-list>
+</div>
+<div *ngIf="edcRole === 1">
+  <div class="sub-header">
+    <h2>Asset List</h2>
+    <div>
+      <button type="button" class="add-button" (click)="addAsset()">
+        Create Asset
+      </button>
+    </div>
+  </div>
+  <ul class="heroes">
+    <li *ngFor="let asset of assets; let i = index">
+      <a>
+        <span class="badge">{{ i + 1 }}</span> <span>{{ getName(asset) }}</span>
+      </a>
+      <button type="button" class="delete" (click)="jsonView(asset)">
+        View more
+      </button>
+      <!-- <a>
+              {{getName(asset)}}
+          </a>
+          <button type="button" class="delete" (click)="jsonView(asset)" title="delete hero">View</button> -->
+      <!-- (click)="delete(provider)" -->
+    </li>
+  </ul>
+</div>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

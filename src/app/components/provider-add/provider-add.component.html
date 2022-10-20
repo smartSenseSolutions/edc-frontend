@@ -1,0 +1,107 @@
+<h2></h2>
+
+<form [formGroup]="assetForm" (ngSubmit)="onSubmit()">
+  <div class="minHeight40">
+    <label for="assetId">Asset ID <span class="required">*</span> </label>
+    <input
+      type="text"
+      id="assetId"
+      name="assetId"
+      class="ML-20"
+      formControlName="assetId"
+      required
+    />
+    <div
+      *ngIf="assetId.invalid && (assetId.dirty || assetId.touched)"
+      class="alert"
+    >
+      <div *ngIf="assetId.errors?.['required']">Asset Id is required.</div>
+    </div>
+  </div>
+
+  <!-- MetaData: -->
+  <h2>MetaData:</h2>
+  <table formGroupName="metaData">
+    <tr>
+      <td class="key-col"><span>Key</span></td>
+      <td><span class="ML-20">Value</span></td>
+    </tr>
+
+    <tr *ngFor="let metData of metaData.controls; let i = index">
+      <td [formGroupName]="i" colspan="5">
+        <input type="text" formControlName="key" />
+        <input type="text" formControlName="value" class="ML-20" />
+        <button
+          class="add-button"
+          *ngIf="metaData.controls.length !== 1"
+          (click)="removeMetaData(i)"
+        >
+          Remove
+        </button>
+        <button
+          class="add-button"
+          *ngIf="metaData.controls.length - 1 === i"
+          (click)="addMetaData()"
+        >
+          Add
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Data Address: -->
+  <h2>DataAddress:</h2>
+  <div formGroupName="dataAddress" class="data-address">
+    <div>
+      <label for="type">Type </label>
+      <input type="text" id="type" name="type" formControlName="type" />
+    </div>
+
+    <div>
+      <label for="baseUrl">BaseUrl </label>
+      <input type="text" formControlName="baseUrl" />
+    </div>
+
+    <div>
+      <label for="method">Method </label>
+      <input type="text" formControlName="method" />
+    </div>
+
+    <div>
+      <label for="baseUrl">MediaType </label>
+      <input type="text" formControlName="mediaType" />
+    </div>
+  </div>
+
+  <div>
+    <label for="policyId" class="label-width"
+      >Policy ID<span class="required">*</span>
+    </label>
+    <input
+      type="text"
+      id="policyId"
+      name="policyId"
+      class="ML-20"
+      formControlName="policyId"
+    />
+  </div>
+
+  <div>
+    <label for="contractDefinitionId" class="label-width"
+      >Contract Definition ID<span class="required">*</span>
+    </label>
+    <input
+      type="text"
+      id="contractDefinitionId"
+      name="contractDefinitionId"
+      class="ML-20"
+      formControlName="contractDefinitionId"
+      required
+    />
+  </div>
+
+  <div>
+    <button type="submit" class="add-button">Submit</button>
+  </div>
+</form>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

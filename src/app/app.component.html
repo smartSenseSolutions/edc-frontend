@@ -1,0 +1,20 @@
+<h1>{{ title }}</h1>
+<nav>
+  <h2>Login As:</h2>
+  <mat-form-field appearance="fill">
+    <mat-label>Select EDC</mat-label>
+    <mat-select
+      [formControl]="edcName"
+      (selectionChange)="onSelectEdc($event.value)"
+    >
+      <mat-option *ngFor="let edc of edcList" [value]="edc">{{
+        edc.value
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</nav>
+<hr />
+<router-outlet></router-outlet>
+<hr />
+<hr />
+<app-edc-data [activeTab]="activeEdcId"></app-edc-data>

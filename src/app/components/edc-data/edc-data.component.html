@@ -1,0 +1,163 @@
+<div>
+  <div class="data__header">
+    <h2>EDC Data</h2>
+    <button type="button" class="add-button" (click)="openDialog()">
+      Create Data
+    </button>
+  </div>
+  <div class="type">
+    <a
+      [ngClass]="{ active: type === edcDataType.SENT }"
+      (click)="onTypeClick(edcDataType.SENT)"
+    >
+      Sent
+    </a>
+    <a
+      [ngClass]="{ active: type === edcDataType.RECEIVED }"
+      (click)="onTypeClick(edcDataType.RECEIVED)"
+    >
+      Received
+    </a>
+  </div>
+
+  <ng-container
+    *ngIf="activeTab >= 3; then normalTable; else tableWithActionButton"
+  >
+  </ng-container>
+
+  <mat-paginator
+    #paginator
+    *ngIf="activeTab >= 3 && totalResult"
+    [length]="totalResult"
+    [pageIndex]="pageIndex"
+    [pageSize]="recordsPerPage"
+    [pageSizeOptions]="PageSizeOptions"
+    (page)="onPaginationChange($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+
+  <h2 *ngIf="!totalResult">No data available</h2>
+</div>
+
+<ng-template #normalTable>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="onSortChange($event)"
+  >
+    <ng-container matColumnDef="notificationId">
+      <th mat-header-cell *matHeaderCellDef>Notification ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.notificationId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="investigationId">
+      <th mat-header-cell *matHeaderCellDef>Investigation ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.investigationId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdDate">
+      <th mat-header-cell *matHeaderCellDef>Created Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.createdDate | date: "medium":"IST" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdBy">
+      <th mat-header-cell *matHeaderCellDef>Created By</th>
+      <td mat-cell *matCellDef="let element">{{ element.createdBy }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="partIds">
+      <th mat-header-cell *matHeaderCellDef>PartIds</th>
+      <td mat-cell *matCellDef="let element">{{ element.partIds }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="notificationReferenceId">
+      <th mat-header-cell *matHeaderCellDef>Notification Reference Id</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.notificationReferenceId || "NA" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.status }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</ng-template>
+
+<ng-template #tableWithActionButton>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ type === edcDataType.RECEIVED ? "Reference ID" : "Data ID" }}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ type === edcDataType.RECEIVED ? element.referenceId : element.id }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="data">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.data }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>Created At</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.createdAt | date: "medium":"IST" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contractAgreementId">
+      <th mat-header-cell *matHeaderCellDef>Contract Agreement Id</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.contractAgreementId || "NA" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.status }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        [ngClass]="{ hidden: type == edcDataType.RECEIVED }"
+      >
+        Action
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [ngClass]="{ hidden: type == edcDataType.RECEIVED }"
+      >
+        <button
+          class="add-button"
+          (click)="openInitiateTransferDialog(element.data, element.id)"
+        >
+          Transfer Data
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</ng-template>

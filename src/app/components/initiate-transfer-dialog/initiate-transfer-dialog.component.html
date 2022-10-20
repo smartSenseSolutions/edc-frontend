@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Create Data</h1>
+<div mat-dialog-content>
+  <form [formGroup]="transferDataForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Select EDC:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>EDC</mat-label>
+        <mat-select formControlName="edc" required>
+          <mat-option *ngFor="let edc of edcDropdownList" [value]="edc">{{
+            edc
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-checkbox formControlName="isUseCatalogCache" color="primary"
+        >Use Catalog Cache</mat-checkbox
+      >
+    </div>
+    <button type="submit" class="add-button">Submit</button>
+  </form>
+</div>
