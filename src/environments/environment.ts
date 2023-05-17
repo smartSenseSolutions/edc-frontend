@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  edc1ApiBaseUrl: 'https://trace-consumer-controlplane.dev.demo.ftcpro.co/',
+  edc1ApiBaseUrl: 'https://trace-consumer-dataplane.dev.demo.ftcpro.co/',
   edc2ApiBaseUrl: 'https://consumer-controlplane.dev.demo.ftcpro.co/',
   edc3ApiBaseUrl: 'https://consumer-controlplane-3.dev.demo.ftcpro.co/',
   edc4ApiBaseUrl: 'https://consumer-controlplane-4.dev.demo.ftcpro.co/',
