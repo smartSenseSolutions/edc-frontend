@@ -82,7 +82,7 @@ export class ProviderListComponent implements OnInit {
   //Helper
   getName(assets) {
     return (
-      (assets['properties'] && assets['properties']['asset:prop:id']) || ''
+      (assets['assetId']) || ''
     );
   }
 
