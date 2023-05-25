@@ -1,10 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -81,9 +75,7 @@ export class ProviderListComponent implements OnInit {
 
   //Helper
   getName(assets) {
-    return (
-      (assets['assetId']) || ''
-    );
+    return assets['id'] || '';
   }
 
   jsonView(data) {

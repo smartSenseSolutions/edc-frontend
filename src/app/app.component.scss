@@ -10,7 +10,17 @@ h1 {
 }
 
 nav {
+  display: flex;
+  gap: 1rem;
   padding: 2rem 0;
+
+  .viewDidLink {
+    align-self: end;
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue;
+    margin-bottom: 1rem;
+  }
 }
 
 h2 {
