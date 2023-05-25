@@ -4,7 +4,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CreateDataDialogComponent } from 'src/app/components';
-import { EdcDataService, NotificationService } from 'src/app/services';
+import {
+  EdcDataService,
+  EdcService,
+  NotificationService,
+} from 'src/app/services';
+import { AssetList } from 'src/app/models/assetList.model';
 import { API } from 'src/app/constant/api.constant';
 import { EDCLIST } from 'src/app/constant/base.constant';
 
@@ -17,10 +22,12 @@ export class InitiateTransferDialogComponent implements OnInit {
   //Form variable
   transferDataForm!: FormGroup;
   edcDropdownList!: string[];
+  assets: AssetList[] = [];
 
   constructor(
     private fb: FormBuilder,
     private edcDataService: EdcDataService,
+    private edcService: EdcService,
     private notificationService: NotificationService,
     private spinnerService: NgxSpinnerService,
     public dialogRef: MatDialogRef<CreateDataDialogComponent>,
@@ -32,29 +39,33 @@ export class InitiateTransferDialogComponent implements OnInit {
   ngOnInit(): void {
     this.transferDataForm = this.fb.group({
       edc: ['', Validators.required],
+      edcAsset: ['', Validators.required],
       isUseCatalogCache: [false],
     });
     if (this.data.id == 1) {
       this.edcDropdownList = ['BASF'];
+      this.getAssetList(2);
     } else if (this.data.id == 2) {
       this.edcDropdownList = ['smartSense'];
+      this.getAssetList(1);
     }
   }
 
+  //Event handler
   onSubmit(): void {
+    const edcName = this.transferDataForm.get('edc').value;
     if (this.transferDataForm.valid) {
-      const edcName = this.transferDataForm.get('edc').value;
       const providerEDC = EDCLIST.find((edc) => edc.value === edcName);
+      const asset = this.transferDataForm.get('edcAsset').value;
 
       const requestBody = {
         useCache: this.transferDataForm.get('isUseCatalogCache').value,
         data: this.data.description,
         providerIdsUrl: API[`EDC${providerEDC.id}`].IDS_URL,
         dataId: this.data.dataId,
-        assetId: 'transfer',
+        assetId: asset['id'],
       };
-
-      this.spinnerService.show();
+      -this.spinnerService.show();
       this.edcDataService.transferData(requestBody, this.data.id).subscribe({
         next: (res) => {
           this.spinnerService.hide();
@@ -74,7 +85,23 @@ export class InitiateTransferDialogComponent implements OnInit {
         },
       });
     } else {
-      this.notificationService.showError('Please select EDC', 'Error');
+      if (!edcName) {
+        this.notificationService.showError('Please select EDC', 'Error');
+      } else {
+        this.notificationService.showError('Please select Asset', 'Error');
+      }
     }
+  }
+
+  //Api calls
+  getAssetList(edcId: number) {
+    this.spinnerService.show();
+    this.edcService.getAsset(edcId).subscribe((data) => {
+      if (data) {
+        this.spinnerService.hide();
+        this.assets = data;
+        console.log(this.assets);
+      }
+    });
   }
 }

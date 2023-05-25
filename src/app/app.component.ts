@@ -37,4 +37,9 @@ export class AppComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  onClickViewDID(): void {
+    const edcName = this.edcList.find((edc) => edc.id === this.activeEdcId);
+    window.open(edcName.link);
+  }
 }

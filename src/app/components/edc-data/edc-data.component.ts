@@ -104,7 +104,7 @@ export class EdcDataComponent implements OnInit, AfterViewInit {
   openInitiateTransferDialog(description: string, id: string): void {
     const dialogRef = this.dialog.open(InitiateTransferDialogComponent, {
       width: '600px',
-      height: '400px',
+      height: '550px',
       data: { id: this.activeTab, description: description, dataId: id },
     });
 
@@ -127,7 +127,7 @@ export class EdcDataComponent implements OnInit, AfterViewInit {
         if (data) {
           if (this.activeTab < 3) {
             this.edcDataList = data.data;
-            this.totalResult = this.edcDataList.length;
+            this.totalResult = this.edcDataList?.length;
             this.dataSource = new MatTableDataSource(this.edcDataList);
           } else {
             this.pages = data.pageCount;

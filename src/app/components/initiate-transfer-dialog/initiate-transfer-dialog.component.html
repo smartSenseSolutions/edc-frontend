@@ -13,6 +13,17 @@
       </mat-form-field>
     </div>
     <div>
+      <label>Select Asset:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Asset Name</mat-label>
+        <mat-select formControlName="edcAsset" required>
+          <mat-option *ngFor="let asset of assets" [value]="asset">{{
+            asset["id"]
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
       <mat-checkbox formControlName="isUseCatalogCache" color="primary"
         >Use Catalog Cache</mat-checkbox
       >
