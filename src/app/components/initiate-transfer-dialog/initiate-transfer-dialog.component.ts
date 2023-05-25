@@ -100,7 +100,6 @@ export class InitiateTransferDialogComponent implements OnInit {
       if (data) {
         this.spinnerService.hide();
         this.assets = data;
-        console.log(this.assets);
       }
     });
   }
