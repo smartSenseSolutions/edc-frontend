@@ -43,10 +43,10 @@ export class InitiateTransferDialogComponent implements OnInit {
       isUseCatalogCache: [false],
     });
     if (this.data.id == 1) {
-      this.edcDropdownList = ['BASF'];
+      this.edcDropdownList = ['Sunrise'];
       this.getAssetList(2);
     } else if (this.data.id == 2) {
-      this.edcDropdownList = ['smartSense'];
+      this.edcDropdownList = ['Hella'];
       this.getAssetList(1);
     }
   }

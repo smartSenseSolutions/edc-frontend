@@ -17,7 +17,7 @@ import { EDCLIST } from './constant/base.constant';
 export class AppComponent implements OnInit {
   edcList = EDCLIST;
 
-  title = 'BASF EDC Demo';
+  title = 'EDC Demo';
 
   activeEdcId: number;
 
