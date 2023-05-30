@@ -1,6 +1,6 @@
 export const EDCLIST = [
-  { id: 1, value: 'Hella', link: 'https://hella.proofsense.in/.well-known/did.json' },
-  { id: 2, value: 'Sunrise', link: 'https://sunrise.proofsense.in/.well-known/did.json' },
+  { id: 1, value: 'Hella', link: 'https://trace-consumer-dataplane.dev.demo.ftcpro.co/.well-known/did.json' },
+  { id: 2, value: 'Sunrise', link: 'https://consumer-controlplane.dev.demo.ftcpro.co/.well-known/did.json' },
   { id: 3, value: 'EDC-3', link: '' },
   { id: 4, value: 'EDC-4', link: '' },
 ];
